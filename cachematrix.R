@@ -1,21 +1,21 @@
 ## 
 ## Cache Matrix function
 
-## function makeMatrix takes a matrix x in the parameter list and creates functions
+## function makeCacheMatrix takes a matrix x in the parameter list and creates functions
 ##  setinverse, getinverse, get, and set which are associated with the matrix as a 
 ##  list of functions. These can then be called as member functions of the matrix
-## 
+## makeCacheMatrix
 ## example:
-##  m = makeMatrix(matrix(rnorm(4,0,10), nrow=2, ncol=2))
+##  m = makeCacheMatrix(matrix(rnorm(4,0,10), nrow=2, ncol=2))
 ##  m$get()         # Returns original matrix
-##  cacheinverse(m) # Computes, caches, and returns matrix inverse
+##  cacheSolve(m) # Computes, caches, and returns matrix inverse
 ##  m$getinverse()  # Returns matrix inverse
-##  cacheinverse(m) # Returns previously computed matrix inverse
+##  cacheSolve(m) # Returns previously computed matrix inverse
 ##
 ##  m$set(matrix(rnorm(4,0,10), nrow=2, ncol=2))  #create new matrix
-##  cacheinverse(m) # Computes, caches, and returns new matrix inverse
+##  cacheSolve(m) # Computes, caches, and returns new matrix inverse
 
-makeMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x = matrix()) {
     inv <- NULL
     set <- function(y) {
             x <<- y
@@ -30,10 +30,10 @@ makeMatrix <- function(x = matrix()) {
 }
 
 
-##  function cacheinverse takes a matrix and returns the inverse of the matrix.
+##  function cacheSolve takes a matrix and returns the inverse of the matrix.
 ##  the computed inverse is then cached, so that in future calls to the function
 ## with this matrix, the inverse does not have to be recomputed. 
-cacheinverse <- function(x, ...) {
+cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
     inv <- x$getinverse()
     #if inverse already exists, return it
