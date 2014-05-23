@@ -1,0 +1,60 @@
+## Put comments here that give an overall description of what your
+## functions do
+
+## Write a short comment describing this function
+
+makeMatrix <- function(x = matrix()) {
+    m <- NULL
+    set <- function(y) {
+            x <<- y
+            m <<- NULL
+    }
+    get <- function() x
+    setinverse <- function(solve) m <<- solve
+    getinverse <- function() m
+    list(set = set, get = get,
+         setinverse = setinverse,
+         getinverse = getinverse)
+}
+
+
+## Write a short comment describing this function
+
+cacheinverse <- function(x, ...) {
+    ## Return a matrix that is the inverse of 'x'
+    #solve(x)
+    m <- x$getinverse()
+    if(!is.null(m)) {
+            message("getting cached data")
+            return(m)
+    }
+    data <- x$get()
+    m <- solve(data, ...)
+    x$setinverse(m)
+    m
+}
+
+
+Moore-Penrose Generalized Inverse of A.
+ginv(A) requires loading the MASS package. 
+
+c=rbind(c(1, -1/4), c(-1/4, 1)) 
+solve(c) %*% c 
+solve(t(matX) %*% matX)
+matX<-matrix(c(rep(1, 8),2,3,4,0,6,4,3,7,-2,-4,3,5,7,8,9,11,4), nrow=5, ncol=5);
+matX
+matXi <- solve(matX)
+zapsmall(matXi %*% matX)
+
+
+
+
+
+
+
+
+
+
+
+
+
